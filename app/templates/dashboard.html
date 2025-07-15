@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h2>Enter Your Resume Information</h2>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">{{ form.name.label }} {{ form.name(class="form-control") }}</div>
+    <div class="mb-3">{{ form.designation.label }} {{ form.designation(class="form-control") }}</div>
+    <div class="mb-3">{{ form.phone.label }} {{ form.phone(class="form-control") }}</div>
+    <div class="mb-3">{{ form.email.label }} {{ form.email(class="form-control") }}</div>
+    <div class="mb-3">{{ form.linkedin.label }} {{ form.linkedin(class="form-control") }}</div>
+    <div class="mb-3">{{ form.summary.label }} {{ form.summary(class="form-control", rows=3) }}</div>
+    <div class="mb-3">{{ form.experience.label }} {{ form.experience(class="form-control", rows=3) }}</div>
+    <div class="mb-3">{{ form.achievements.label }} {{ form.achievements(class="form-control", rows=3) }}</div>
+    <div class="mb-3">{{ form.skills.label }} {{ form.skills(class="form-control", rows=3) }}</div>
+    <div class="mb-3">{{ form.education.label }} {{ form.education(class="form-control", rows=3) }}</div>
+    <div class="mb-3">{{ form.courses.label }} {{ form.courses(class="form-control", rows=3) }}</div>
+    <div class="mb-3">{{ form.submit(class="btn btn-primary") }}</div>
+</form>
+{% endblock %}
