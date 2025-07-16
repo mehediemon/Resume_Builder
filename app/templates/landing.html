@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>DevResume - Resume Builder for Developers</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .hero {
+            background: linear-gradient(to right, #cfe2ff, #ffffff, #e0d4f7);
+            padding: 150px 20px;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+        <div class="container">
+            <a class="navbar-brand" href="/">Resume Builder</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('profile') }}">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('dashboard') }}">Progress</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Logout</a></li>
+                    {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('register') }}">Register</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Build Your Developer Resume</h1>
+            <p class="lead text-muted mt-3 mb-4">
+                A simple, fast, and elegant resume builder designed for software engineers and DevOps professionals in
+                Bangladesh.
+            </p>
+            {% if current_user.is_authenticated %}
+            <a href="/profile" class="btn btn-primary btn-lg px-4 shadow">Start Building Now</a>
+            {% else %}
+            <a href="/login" class="btn btn-primary btn-lg px-4 shadow">Start Building Now</a>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-4 mb-4">
+                    <div class="feature-icon text-primary">⚙️</div>
+                    <h5 class="fw-bold">Fully Customizable</h5>
+                    <p class="text-muted">Edit your experience, skills, and education with ease. Use markdown or HTML.
+                    </p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-icon text-purple">📄</div>
+                    <h5 class="fw-bold">PDF Export</h5>
+                    <p class="text-muted">Download your resume as a clean, professional PDF instantly.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-icon text-success">💻</div>
+                    <h5 class="fw-bold">Built for Developers</h5>
+                    <p class="text-muted">Designed by a DevOps engineer, tailored for tech roles in Bangladesh and
+                        beyond.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works - Enhanced Modern Section -->
+    <section class="py-5" style="background: linear-gradient(120deg, #f5f7fa, #e0ecff);">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-5">How It Works</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="bg-white rounded-4 shadow-sm p-4 h-100 text-center transition">
+                        <div class="mb-3" style="font-size: 40px;">📝</div>
+                        <h5 class="fw-bold">Step 1: Create Your Profile</h5>
+                        <p class="text-muted">Quickly enter your details — from experience to skills — using our smart
+                            resume form.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="bg-white rounded-4 shadow-sm p-4 h-100 text-center transition">
+                        <div class="mb-3" style="font-size: 40px;">👀</div>
+                        <h5 class="fw-bold">Step 2: Live Preview</h5>
+                        <p class="text-muted">Watch your resume build in real time as you make edits. No guessing, no
+                            surprises.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="bg-white rounded-4 shadow-sm p-4 h-100 text-center transition">
+                        <div class="mb-3" style="font-size: 40px;">📥</div>
+                        <h5 class="fw-bold">Step 3: Download PDF</h5>
+                        <p class="text-muted">Get a polished, print-ready PDF with a single click — styled for
+                            developers, ATS-ready.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Optional minimal CSS for hover effect -->
+        <style>
+            .transition {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+
+            .transition:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.1);
+            }
+        </style>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-4">What Developers Are Saying</h2>
+            <div class="row text-center">
+                <div class="col-md-4 mb-4">
+                    <div class="p-4 border rounded bg-white h-100">
+                        <p class="text-muted fst-italic">"DevResume made it super easy to build and export a resume that
+                            looks clean and professional."</p>
+                        <h6 class="fw-bold mt-3 mb-0">Raihan S.</h6>
+                        <small class="text-muted">Backend Engineer, Dhaka</small>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="p-4 border rounded bg-white h-100">
+                        <p class="text-muted fst-italic">"Finally, a resume builder that understands what developers
+                            need. The PDF export is top-notch!"</p>
+                        <h6 class="fw-bold mt-3 mb-0">Tahmina A.</h6>
+                        <small class="text-muted">DevOps Specialist, Chattogram</small>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="p-4 border rounded bg-white h-100">
+                        <p class="text-muted fst-italic">"Clean UI, easy form input, and no clutter. Highly recommend it
+                            to any Bangladeshi developer."</p>
+                        <h6 class="fw-bold mt-3 mb-0">Faisal K.</h6>
+                        <small class="text-muted">Frontend Developer, Rajshahi</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Bootstrap JS (optional, for navbar toggling etc.) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

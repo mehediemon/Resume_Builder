@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% block title %}Build Resume - DevResume{% endblock %}
+
+{% block content %}
+<style>
+  body {
+    background: linear-gradient(135deg, #eef2f3 0%, #8e9eab 100%);
+
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  label {
+    font-weight: 600;
+  }
+
+  .form-section-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 2rem;
+    color: #0d6efd;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .form-section-title i {
+    font-size: 1.2rem;
+  }
+</style>
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <div class="glass-card p-5">
+        <h2 class="text-center text-primary fw-bold mb-4">🚀 Build Your Developer Resume</h2>
+        <form method="POST">
+          {{ form.hidden_tag() }}
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              {{ form.name.label(class="form-label") }}
+              {{ form.name(class="form-control", placeholder="Mehedi Hasan Emon") }}
+            </div>
+            <div class="col-md-6 mb-3">
+              {{ form.designation.label(class="form-label") }}
+              {{ form.designation(class="form-control", placeholder="DevOps Engineer | Cloud Solutions") }}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              {{ form.phone.label(class="form-label") }}
+              {{ form.phone(class="form-control", placeholder="+8801XXXXXXXXX") }}
+            </div>
+            <div class="col-md-4 mb-3">
+              {{ form.email.label(class="form-label") }}
+              {{ form.email(class="form-control", placeholder="you@example.com") }}
+            </div>
+            <div class="col-md-4 mb-3">
+              {{ form.linkedin.label(class="form-label") }}
+              {{ form.linkedin(class="form-control", placeholder="https://linkedin.com/in/your-profile") }}
+            </div>
+          </div>
+
+          <div class="form-section-title"><i class="bi bi-person-lines-fill"></i> Summary</div>
+          <div class="mb-3">
+            {{ form.summary(class="form-control", style="height: 100px;", placeholder="A passionate DevOps engineer...") }}
+          </div>
+
+          <div class="form-section-title"><i class="bi bi-briefcase-fill"></i> Experience</div>
+          <div class="mb-3">
+            {{ form.experience(class="form-control", style="height: 200px;") }}
+            <div class="form-text">Separate jobs with <code>||</code>. Use multiple lines per job.</div>
+          </div>
+
+          <div class="form-section-title"><i class="bi bi-trophy-fill"></i> Achievements</div>
+          <div class="mb-3">
+            {{ form.achievements(class="form-control", style="height: 120px;", placeholder="• Reduced cloud costs by 25%...") }}
+          </div>
+
+          <div class="form-section-title"><i class="bi bi-lightning-charge-fill"></i> Skills</div>
+          <div class="mb-3">
+            {{ form.skills(class="form-control", style="height: 80px;", placeholder="AWS, Docker, Python, Kubernetes") }}
+          </div>
+
+          <div class="form-section-title"><i class="bi bi-mortarboard-fill"></i> Education</div>
+          <div class="mb-3">
+            {{ form.education(class="form-control", style="height: 150px;", placeholder="B.S.C. in C.S.E\nDaffodil International University\n2019") }}
+          </div>
+
+          <div class="form-section-title"><i class="bi bi-book-fill"></i> Courses & Training</div>
+          <div class="mb-4">
+            {{ form.courses(class="form-control", style="height: 100px;", placeholder="CKA - Linux Pathshala\nAWS Architect – AWS SkillBuilder") }}
+          </div>
+
+          <div class="text-center">
+            {{ form.submit(class="btn btn-primary btn-lg px-5 shadow") }}
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+{% endblock %}

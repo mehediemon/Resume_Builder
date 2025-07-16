@@ -1,20 +1,118 @@
 {% extends "base.html" %}
 {% block title %}Dashboard{% endblock %}
+
 {% block content %}
-<h2>Enter Your Resume Information</h2>
-<form method="POST">
-    {{ form.hidden_tag() }}
-    <div class="mb-3">{{ form.name.label }} {{ form.name(class="form-control") }}</div>
-    <div class="mb-3">{{ form.designation.label }} {{ form.designation(class="form-control") }}</div>
-    <div class="mb-3">{{ form.phone.label }} {{ form.phone(class="form-control") }}</div>
-    <div class="mb-3">{{ form.email.label }} {{ form.email(class="form-control") }}</div>
-    <div class="mb-3">{{ form.linkedin.label }} {{ form.linkedin(class="form-control") }}</div>
-    <div class="mb-3">{{ form.summary.label }} {{ form.summary(class="form-control", rows=3) }}</div>
-    <div class="mb-3">{{ form.experience.label }} {{ form.experience(class="form-control", rows=3) }}</div>
-    <div class="mb-3">{{ form.achievements.label }} {{ form.achievements(class="form-control", rows=3) }}</div>
-    <div class="mb-3">{{ form.skills.label }} {{ form.skills(class="form-control", rows=3) }}</div>
-    <div class="mb-3">{{ form.education.label }} {{ form.education(class="form-control", rows=3) }}</div>
-    <div class="mb-3">{{ form.courses.label }} {{ form.courses(class="form-control", rows=3) }}</div>
-    <div class="mb-3">{{ form.submit(class="btn btn-primary") }}</div>
-</form>
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold text-gradient"><i class="bi bi-bar-chart-line-fill me-2"></i>Your Progress Dashboard</h2>
+        <p class="text-muted">Track your resume improvement over time with insights and highlights.</p>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8">
+            <div class="card shadow-lg border-0 rounded-4 bg-light">
+                <div class="card-body p-4">
+                    <h4 class="card-title text-primary mb-4">📈 Resume Update Overview</h4>
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="badge bg-gradient-blue fs-6">Last 1 Month</span>
+                        <span class="fw-bold fs-5 text-dark">{{ updates_last_month }} Updates</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <span class="badge bg-gradient-purple fs-6">Last 3 Months</span>
+                        <span class="fw-bold fs-5 text-dark">{{ updates_last_3_months }} Updates</span>
+                    </div>
+
+                    <hr>
+
+                    <h5 class="text-success mt-4"><i class="bi bi-lightbulb-fill me-2"></i>What’s New in Last Month</h5>
+                    <ul class="list-unstyled ps-3">
+                        <li class="mb-2">
+                            🛠️ Skills Added: 
+                            <span class="badge {{ 'bg-success' if changes_1m.skills_flag else 'bg-danger' }}">
+                                {{ 'Yes' if changes_1m.skills_flag else 'No' }}
+                            </span>
+                        </li>
+                        {% if changes_1m.skills_names %}
+                        <ul class="ps-3 fade-in">
+                            {% for skill in changes_1m.skills_names %}
+                            <li><i class="bi bi-check-circle-fill text-success me-1"></i>{{ skill }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        <li>🏆 Achievements Added: 
+                            <span class="badge {{ 'bg-success' if changes_1m.achievements_flag else 'bg-danger' }}">
+                                {{ 'Yes' if changes_1m.achievements_flag else 'No' }}
+                            </span>
+                        </li>
+                        <li>🎓 Certifications Added: 
+                            <span class="badge {{ 'bg-success' if changes_1m.courses_flag else 'bg-danger' }}">
+                                {{ 'Yes' if changes_1m.courses_flag else 'No' }}
+                            </span>
+                        </li>
+                    </ul>
+
+                    <h5 class="text-info mt-4"><i class="bi bi-clock-history me-2"></i>Changes in Last 3 Months</h5>
+                    <ul class="list-unstyled ps-3">
+                        <li class="mb-2">
+                            🛠️ Skills Added: 
+                            <span class="badge {{ 'bg-success' if changes_3m.skills_flag else 'bg-danger' }}">
+                                {{ 'Yes' if changes_3m.skills_flag else 'No' }}
+                            </span>
+                        </li>
+                        {% if changes_3m.skills_names %}
+                        <ul class="ps-3 fade-in">
+                            {% for skill in changes_3m.skills_names %}
+                            <li><i class="bi bi-check-circle-fill text-success me-1"></i>{{ skill }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        <li>🏆 Achievements Added: 
+                            <span class="badge {{ 'bg-success' if changes_3m.achievements_flag else 'bg-danger' }}">
+                                {{ 'Yes' if changes_3m.achievements_flag else 'No' }}
+                            </span>
+                        </li>
+                        <li>🎓 Certifications Added: 
+                            <span class="badge {{ 'bg-success' if changes_3m.courses_flag else 'bg-danger' }}">
+                                {{ 'Yes' if changes_3m.courses_flag else 'No' }}
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .text-gradient {
+        background: linear-gradient(to right, #007bff, #6610f2);
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .bg-gradient-blue {
+        background: linear-gradient(90deg, #007bff, #00c6ff);
+        color: white;
+    }
+
+    .bg-gradient-purple {
+        background: linear-gradient(90deg, #6f42c1, #d63384);
+        color: white;
+    }
+
+    .fade-in {
+        animation: fadeIn 0.6s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .badge {
+        padding: 0.5em 0.75em;
+        font-size: 0.9rem;
+    }
+</style>
 {% endblock %}

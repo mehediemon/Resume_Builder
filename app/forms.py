@@ -19,9 +19,25 @@ class ResumeForm(FlaskForm):
     email = StringField('Email')
     linkedin = StringField('LinkedIn')
     summary = TextAreaField('Summary')
-    experience = TextAreaField('Experience')
+    experience = TextAreaField('Experience', render_kw={
+        "placeholder": 
+"""Designation
+Company Location
+Company Name
+Date – Date or Present
+Description 1
+Description 2
+||
+Designation
+Company Location
+Company Name
+Date – Date or Present
+Description 1
+Description 2""",
+ "style": "height: 200px;"
+    })
     achievements = TextAreaField('Achievements')
     skills = TextAreaField('Skills (comma-separated)')
     education = TextAreaField('Education')
     courses = TextAreaField('Courses / Training')
-    submit = SubmitField('Save and Download PDF')
+    submit = SubmitField('Update and View Profile')

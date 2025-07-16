@@ -1,5 +1,6 @@
 from app import db
 from flask_login import UserMixin
+from datetime import datetime
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -21,3 +22,11 @@ class Resume(db.Model):
     education = db.Column(db.Text)
     courses = db.Column(db.Text)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+
+class ResumeHistory(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    resume_snapshot = db.Column(db.Text)  # JSON string or pickled object
+    resume_id = db.Column(db.Integer, db.ForeignKey('resume.id'))
+    resume = db.relationship('Resume', backref='history')

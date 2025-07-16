@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: "Helvetica", sans-serif;
+            margin: 10px;
+            font-size: 12px;
+            color: #000;
+        }
+
+        .name-title {
+            text-align: left;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            text-align: left;
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: #444;
+        }
+
+        .contact {
+            text-align: left;
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 25px;
+        }
+
+        .section {
+            margin-bottom: 5px;
+        }
+
+        .section h2 {
+            font-size: 16px;
+            border-bottom: 1px solid #aaa;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .job-title {
+            font-weight: bold;
+        }
+
+        .job-company {
+            font-style: italic;
+            margin-bottom: 5px;
+        }
+
+        ul {
+            margin-top: 5px;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        .small {
+            font-size: 12px;
+            color: #555;
+        }
+
+        .column {
+            width: 48%;
+            display: inline-block;
+            vertical-align: top;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="name-title">{{ resume.name }}</div>
+    <div class="subtitle">{{ resume.designation }}</div>
+    <div class="contact">
+        {{ resume.phone }} | {{ resume.email }} | {{ resume.linkedin }} | Dhaka
+    </div>
+
+    <div class="section">
+        <h2>Summary</h2>
+        <p>{{ resume.summary }}</p>
+    </div>
+
+    <div class="section">
+        <h2>Experience</h2>
+        {% for job in resume.experience.split('||') %}
+        {% set lines = job.strip().split('\n') %}
+        <div class="job-entry">
+            <p><strong>{{ lines[0] }}</strong> <span class="small" style="float: right;">{{ lines[1] }}</span></p>
+            <p><em>{{ lines[2] }}</em> <span class="small" style="float: right;">{{ lines[3] }}</span></p>
+            <ul>
+                {% for line in lines[4:] %}
+                {% if line.strip() %}
+                <li>{{ line.strip() }}</li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="section">
+        <h2>Key Achievements</h2>
+        {{ resume.achievements | safe }}
+    </div>
+
+    <div class="section">
+        <h2>Skills</h2>
+        <ul>
+            {% for skill in resume.skills.split('\n') %}
+            <li>{{ skill.strip() }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="section">
+        <h2>Education</h2>
+        <ul style="list-style: none; padding-left: 0;">
+            {% for edu in resume.education.split('||') %}
+            {% set parts = edu.strip().split('\n') %}
+            <li style="margin-bottom: 10px;">
+                <strong>{{ parts[0] }}</strong><br>
+                <em>{{ parts[1] }}</em><span class="small" style="float: right;">{{ parts[2] }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Training & Courses</h2>
+        {{ resume.courses | safe }}
+    </div>
+
+</body>
+
+</html>
